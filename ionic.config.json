@@ -1,0 +1,7 @@
+{
+  "name": "AppZueira",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
