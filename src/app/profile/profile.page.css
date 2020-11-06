@@ -1,0 +1,17 @@
+
+.custom-dropzone {
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background-color 400ms;
+    
+  }
+  
+  .custom-dropzone:hover {
+    background-color: rgba(223, 233, 223, 0.7);
+  }
+  

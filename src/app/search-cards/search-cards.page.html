@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar><ion-buttons  slot="start">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+      <ion-segment color="secondary" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="monster">
+          <ion-label>Monstros</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="magic">
+          <ion-label>Magia/Armadilha</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <ion-item *ngIf="val == 'monster'">
+      <ion-label>Tipo</ion-label>
+      <ion-select multiple="true" >
+        <ion-select-option  *ngFor="let d of yugiohGroup" value="{{d.value}}">{{d.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+</ion-content>
