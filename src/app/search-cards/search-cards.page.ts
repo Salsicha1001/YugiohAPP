@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-cards.page.scss'],
 })
 export class SearchCardsPage implements OnInit {
-  val: any
+  val: any = "monster";
+  typemagic:any
   constructor() { }
   yugiohGroup: TypeCard[] = [
     { name: "Monstro Efeito", value: "effect monster" },
@@ -58,11 +59,29 @@ export class SearchCardsPage implements OnInit {
     { name: "Besta Alada", value: "winged%20beast" },
 
   ]
+  spell: TypeCard[] = [
+    { name: "Magia", value: 'spell card' },
+    { name: "Armadilha", value: "trap card" }
+  ]
+
+  racemagic: RaceModel[] = [
+    { name: "Normal", value: "normal" },
+    { name: "Campo", value: "field" },
+    { name: "Equipamento", value: "equip" },
+    { name: "Continuo", value: "continuous" },
+    { name: "Rápida", value: "quick-play" },
+    { name: "Ritual", value: "ritual" },
+  ]
+  racetrap: RaceModel[] = [
+    { name: "Normal", value: "normal" },
+    { name: "Resposta", value: "counter" },
+    { name: "Continuo", value: "continuous" },
+
+  ]
   ngOnInit() {
   }
   segmentChanged(ev: any) {
     this.val = ev.detail.value
-    console.log(this.val)
   }
 
 }

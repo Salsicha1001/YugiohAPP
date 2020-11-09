@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -16,12 +17,14 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+
   ) {
     this.initializeApp();
     this.sideMenu();
   }
   ngOnInit() {
+
   }
 
   initializeApp() {

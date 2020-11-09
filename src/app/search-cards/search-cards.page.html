@@ -3,7 +3,7 @@
       <ion-menu-button></ion-menu-button>
       </ion-buttons>
 
-      <ion-segment color="secondary" (ionChange)="segmentChanged($event)">
+      <ion-segment color="secondary" (ionChange)="segmentChanged($event)" scrollable value="monster">
         <ion-segment-button value="monster">
           <ion-label>Monstros</ion-label>
         </ion-segment-button>
@@ -16,11 +16,46 @@
 
 <ion-content>
  
-  <ion-item *ngIf="val == 'monster'">
+  <ion-list *ngIf="val == 'monster'">
+    <ion-item-divider>
+    <ion-item>
       <ion-label>Tipo</ion-label>
-      <ion-select multiple="true" >
+      <ion-select >
         <ion-select-option  *ngFor="let d of yugiohGroup" value="{{d.value}}">{{d.name}}</ion-select-option>
       </ion-select>
     </ion-item>
+      <ion-item>
+      <ion-label>Raça</ion-label>
+      <ion-select >
+        <ion-select-option  *ngFor="let d of raceGroup" value="{{d.value}}">{{d.name}}</ion-select-option>
+      </ion-select>
+      </ion-item>
+      <ion-button>Buscar</ion-button>
+      </ion-item-divider>
 
+    </ion-list>
+    <ion-list *ngIf="val == 'magic'">
+      <ion-item-divider>
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select [(ngModel)]="typemagic" name="type">
+          <ion-select-option  *ngFor="let d of spell" value="{{d.value}}">{{d.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+        <ion-item *ngIf="typemagic ==='spell card'">
+        <ion-label>Efeito</ion-label>
+        <ion-select >
+          <ion-select-option  *ngFor="let d of racemagic" value="{{d.value}}">{{d.name}}</ion-select-option>
+        </ion-select>
+        </ion-item>
+        <ion-item *ngIf="typemagic ==='trap card'">
+          <ion-label>Efeito</ion-label>
+          <ion-select >
+            <ion-select-option  *ngFor="let d of racetrap" value="{{d.value}}">{{d.name}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        <ion-button>Buscar</ion-button>
+        </ion-item-divider>
+      </ion-list>
+<app-list-cards></app-list-cards>
 </ion-content>

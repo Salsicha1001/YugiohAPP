@@ -1,0 +1,20 @@
+
+
+  <ion-list>
+<div *ngFor="let c of cards">
+<ion-card  (click)="onClick(c)">
+    <img [src]="c.card_images[0].image_url||'../../assets/img/reverse.png'">
+  
+
+</ion-card>
+
+</div>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Buscando mais cartas">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</ion-list>
+
+
