@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { CardService } from './../Services/Cards/card.service';
 import { Card } from './../Model/Card.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -15,25 +16,27 @@ export class ListCardsPage implements OnInit {
 
   constructor(private cardService: CardService,
     public loadingCtrl: LoadingController,
-  private navCtrl:NavController) { }
+    private navCtrl: NavController) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    let loader = await this.presentLoading();
     this.load()
+    loader.dismiss()
   }
- async load() {
- 
-   this.cardService.findAll(this.page, 10).subscribe((u: any) => {
-    let start = this.cards.length;
-     this.cards = this.cards.concat(u['data'])
+  async load() {
+
+    this.cardService.findAll(this.page, 18).subscribe((u: any) => {
+      let start = this.cards.length;
+      this.cards = this.cards.concat(u['data'])
       console.log(this.cards)
-     let end = this.cards.length - 1;
-     console.log(this.page)
+      let end = this.cards.length - 1;
+      console.log(this.page)
 
     })
   }
 
   onClick(c) {
-    this.navCtrl.navigateForward("detais-cards", {state:{c:c}})
+    this.navCtrl.navigateForward("detais-cards", { state: { c: c } })
   }
 
   async presentLoading() {
@@ -46,7 +49,7 @@ export class ListCardsPage implements OnInit {
   doInfinite(event) {
 
     setTimeout(() => {
-      this.page+=10;
+      this.page += 18;
       this.load();
       event.target.complete();
     }, 500);

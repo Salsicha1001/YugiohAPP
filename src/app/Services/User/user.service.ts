@@ -16,4 +16,16 @@ constructor(private http:HttpClient, private storageService:StorageService) { }
     return this.http.get(`${API_CONFIG.base_url}/user/email=${a}`)
  
   }
+
+  saveCardUser(card) {
+    return this.http.post(`${API_CONFIG.base_url}/card/add`, card)
+  }
+  getCardUser() {
+    let email = this.storageService.getLocalUser().email
+    return this.http.get(`${API_CONFIG.base_url}/card/cart/${email}`)
+  }
+  removeCard(id) {
+    return this.http.get(`${API_CONFIG.base_url}/card/remove/${id}`)
+
+  }
 }

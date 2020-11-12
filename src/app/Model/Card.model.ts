@@ -3,7 +3,7 @@ export class Card {
   name?: string
   type?: string
   desc?: string
-  img?: []
+  card_images?: []
   archetype?: string
   scale?: string
   race?: string
@@ -12,4 +12,7 @@ export class Card {
   def?: string
   level?: string
   attribute?: string
+  linkmarkers?: string
+  linkval: string
+  ban:string
 }

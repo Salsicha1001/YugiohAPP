@@ -1,13 +1,110 @@
-<ion-header>
+<ion-header translucent="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{card?.name}}</ion-title>
+    <MARQUEE SCROLLAMOUNT=7>{{card?.name}}</MARQUEE>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
+  <div class="scene">
+    <div class="card">
+      <div class="front">
+        <img src="{{img}}">
+      </div>
+      <div class="back">
+        <img src="../../assets/img/reverse.png">
 
+      </div>
+    </div>
+  </div>
+  <ion-fab  vertical="top" horizontal="end" slot="fixed" >
+    <ion-fab-button color="light">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list  side="bottom">
+      <ion-fab-button color="light" (click)="presentModal()"><ion-icon name="eye"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="card.check"  color="light" (click)="deleteFav()"><ion-icon name="trash"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!card.check"  color="light" (click)="favorit(card)"><ion-icon name="star-outline"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <div *ngIf="card?.type== 'Spell Card'|| card?.type=='Trap Card'; else Monster">
+    <ion-card>
+      <ion-grid class="ion-align-items-start">
+        <ion-row>
+          <ion-col>
+            Tipo:{{card?.type}}
+          </ion-col>
+          <ion-col>
+            Efeito: {{card?.race}}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="card?.archetype ||card?.banlist_info">
+          <ion-col *ngIf="card?.archetype">
+            Classe: {{card?.archetype}}
+          </ion-col>
+          <ion-col *ngIf="card?.banlist_info">
+            CARTA BANIDA
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Descrição: {{card?.desc}}</p>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+    </ion-card>
+  </div>
+
+  <ng-template #Monster>
+    <ion-card>
+      <ion-grid class="ion-align-items-start">
+        <ion-row>
+
+          <ion-col>
+            Tipo:{{card?.type}}
+          </ion-col>
+          <ion-col>
+            Raça: {{card?.race}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngIf="card?.atk||card?.atk== 0">
+            Ataque:{{card?.atk ||'??'}}
+          </ion-col>
+          <ion-col *ngIf="card?.def">
+            Defesa: {{card?.def}}
+          </ion-col>
+          <ion-col *ngIf="card?.linkval">
+            LINK: {{card?.linkval}}
+          </ion-col>
+          <ion-col *ngIf="card?.level">
+            Level: {{card?.level}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngIf="card?.archetype">
+            Classe:{{card?.archetype}}
+          </ion-col>
+          <ion-col *ngIf="card?.attribute">
+            Atributo:{{card?.attribute}}
+          </ion-col>
+          <ion-col *ngIf="card?.banlist_info">
+            CARTA BANIDA
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            Descrição: {{card?.desc}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-template>
 </ion-content>

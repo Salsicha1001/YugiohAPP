@@ -43,5 +43,10 @@ export class AuthService {
       return null;
     }
   }
-
+  isAuthenticated() {
+    if (this.storageService.getLocalUser() === null) {
+      return false;
+    }
+   return true;
+}
 }

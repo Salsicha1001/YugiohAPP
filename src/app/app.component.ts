@@ -37,7 +37,8 @@ export class AppComponent implements OnInit {
   sideMenu() {
     this.pages = [
       { title: "Perfil", component: "profile" },
-      {title:"Cartas", component:"search-cards"}
+      { title: "Cartas", component: "search-cards" },
+      {title:"Favoritos", component:"favorites"}
    
     ];
   }

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar><ion-buttons  slot="start">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+    pullingIcon="chevron-down-circle-outline"
+      pullingText="Puxe para recarregar"
+      refreshingSpinner="circles"
+      ></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <div *ngFor="let c of card">
+    <ion-card  (click)="onClick(c)">
+        <img [src]="c.card.card_images[0].image_url||'../../assets/img/reverse.png'">
+      
+    
+    </ion-card>
+    
+    </div>
+
+    </ion-list>
+    <div *ngIf="card.length==0 && notCard == true">
+      <ion-text color="danger"><h1>Você não tem cartas Favoritas</h1></ion-text>
+    </div>
+</ion-content>
