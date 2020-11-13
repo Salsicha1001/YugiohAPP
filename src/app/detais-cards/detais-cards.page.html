@@ -1,7 +1,7 @@
 <ion-header translucent="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="search-cards"></ion-back-button>
     </ion-buttons>
     <MARQUEE SCROLLAMOUNT=7>{{card?.name}}</MARQUEE>
   </ion-toolbar>
@@ -20,15 +20,21 @@
       </div>
     </div>
   </div>
-  <ion-fab  vertical="top" horizontal="end" slot="fixed" >
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="light">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list  side="bottom">
-      <ion-fab-button color="light" (click)="presentModal()"><ion-icon name="eye"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="card.check"  color="light" (click)="deleteFav()"><ion-icon name="trash"></ion-icon></ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button color="light" (click)="presentModal()">
+        <ion-icon name="eye"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="card.check" color="light" (click)="deleteFav()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
 
-      <ion-fab-button *ngIf="!card.check"  color="light" (click)="favorit(card)"><ion-icon name="star-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="!card.check" color="light" (click)="favorit(card)">
+        <ion-icon name="star-outline"></ion-icon>
+      </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 
@@ -44,8 +50,10 @@
           </ion-col>
         </ion-row>
         <ion-row *ngIf="card?.archetype ||card?.banlist_info">
-          <ion-col *ngIf="card?.archetype">
-            Classe: {{card?.archetype}}
+          <ion-col *ngIf="card?.archetype" (click)="findArchetype(card?.archetype)">
+            <ion-text color="primary">
+              Classe:{{card?.archetype}}
+            </ion-text>
           </ion-col>
           <ion-col *ngIf="card?.banlist_info">
             CARTA BANIDA
@@ -89,8 +97,10 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col *ngIf="card?.archetype">
-            Classe:{{card?.archetype}}
+          <ion-col *ngIf="card?.archetype" (click)="findArchetype(card?.archetype)">
+            <ion-text color="primary">
+              Classe:{{card?.archetype}}
+            </ion-text>
           </ion-col>
           <ion-col *ngIf="card?.attribute">
             Atributo:{{card?.attribute}}

@@ -3,6 +3,7 @@ import { CardService } from './../Services/Cards/card.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, NavController, NavParams } from '@ionic/angular';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-list-cards-search',
@@ -22,7 +23,7 @@ export class ListCardsSearchPage implements OnInit {
 
   async ngOnInit() {
     const nav = this.route.getCurrentNavigation()
- 
+
     if (nav.extras.state === undefined) {
 
       this.navCtrl.navigateBack('search-cards')
@@ -31,6 +32,7 @@ export class ListCardsSearchPage implements OnInit {
 
     else {
       this.search = nav.extras.state.any
+      console.log(this.search)
       let loader = await this.presentLoading();
       this.find();
       loader.dismiss()
@@ -40,71 +42,137 @@ export class ListCardsSearchPage implements OnInit {
 
 
   find() {
+    if (this.search.att ==true) {
+      this.cardService.findClass(this.page, 18, this.search.attribute).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
 
+      })
+     }
 
-      if (this.search.magic === "spell card" && this.search.race === undefined) {
-        this.cardService.findAllSpell(this.page, 18).subscribe((u) => {
-          let start = this.cards.length;
-          this.cards = this.cards.concat(u['data'])
-          this.meta = this.meta.concat(u['meta'])
-          let end = this.cards.length - 1;
+  else if (this.search.magic === "spell card" && this.search.race === undefined) {
+      this.cardService.findAllSpell(this.page, 18).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
 
-        })
-      } else if (this.search.magic === "trap card" && this.search.race === undefined) {
-        this.cardService.findAllTrap(this.page, 18).subscribe((u) => {
-          let start = this.cards.length;
-          this.cards = this.cards.concat(u['data'])
-          this.meta = this.meta.concat(u['meta'])
-          let end = this.cards.length - 1;
+      })
+    }
+    else if (this.search.magic === "spell card" && this.search.race === "") {
+      this.cardService.findAllSpell(this.page, 18).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
 
-        })
-      } else if (this.search.magic === "trap card" && this.search.race != undefined) {
-        this.cardService.findAllTrapRace(this.page, 18, this.search.race).subscribe((u) => {
-          let start = this.cards.length;
-          this.cards = this.cards.concat(u['data'])
-          this.meta = this.meta.concat(u['meta'])
-          let end = this.cards.length - 1;
+      })
+    }
 
-        })
-      } else if (this.search.magic === "spell card" && this.search.race != undefined) {
-        this.cardService.findAllSpelRace(this.page, 18, this.search.race).subscribe((u) => {
-          let start = this.cards.length;
-          this.cards = this.cards.concat(u['data'])
-          this.meta = this.meta.concat(u['meta'])
-          let end = this.cards.length - 1;
+    else if (this.search.magic === "trap card" && this.search.race === undefined) {
+      this.cardService.findAllTrap(this.page, 18).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
 
-        })
-      }
-      else if (this.search.type != undefined && this.search.race == undefined || this.search.race == "") {
-        this.cardService.findAllMonster(this.page, 18, this.search.type).subscribe((u) => {
-          let start = this.cards.length;
-          this.cards = this.cards.concat(u['data'])
-          this.meta = this.meta.concat(u['meta'])
-          let end = this.cards.length - 1;
+      })
+    }
+    else if (this.search.magic === "trap card" && this.search.race === "") {
+      this.cardService.findAllTrap(this.page, 18).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
 
-        })
-      } else if (this.search.type === undefined ||this.search.type ===  "" && this.search.race != undefined || this.search.race != "") {
-        this.cardService.findAllMonsterRace(this.page, 18, this.search.race).subscribe((u) => {
-          let start = this.cards.length;
-          this.cards = this.cards.concat(u['data'])
-          this.meta = this.meta.concat(u['meta'])
-          let end = this.cards.length - 1;
+      })
+    }
+    else if (this.search.magic === "trap card" && this.search.race != undefined) {
+      this.cardService.findAllTrapRace(this.page, 18, this.search.race).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
 
-        })
-      } else {
-        this.cardService.findAllMonsterTypeRace(this.page, 18, this.search.type, this.search.race).subscribe((u) => {
-          let start = this.cards.length;
-          this.cards = this.cards.concat(u['data'])
-          this.meta = this.meta.concat(u['meta'])
-          let end = this.cards.length - 1;
+      })
+    }
+    else if (this.search.magic === "trap card" && this.search.race != "") {
+      this.cardService.findAllTrapRace(this.page, 18, this.search.race).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
 
-        })
-      }
-    
+      })
+    } else if (this.search.magic === "spell card" && this.search.race != undefined) {
+      this.cardService.findAllSpelRace(this.page, 18, this.search.race).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
+
+      })
+    }
+    else if (this.search.magic === "spell card" && this.search.race != "") {
+      this.cardService.findAllSpelRace(this.page, 18, this.search.race).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
+
+      })
+    }
+    else if (this.search.type != undefined && this.search.race == undefined) {
+      this.cardService.findAllMonster(this.page, 18, this.search.type).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
+
+      })
+    } else if (this.search.type === void 0 && this.search.race != undefined && this.search.race != "") {
+      console.log(this.search.type)
+      this.cardService.findAllMonsterRace(this.page, 18, this.search.race).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
+
+      })
+    } else if (this.search.type != undefined && this.search.race == "") {
+      this.cardService.findAllMonster(this.page, 18, this.search.type).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
+
+      })
+    } else if (this.search.type === "" && this.search.race != undefined && this.search.race != "") {
+      console.log(this.search.type)
+      this.cardService.findAllMonsterRace(this.page, 18, this.search.race).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
+
+      })
+    }
+    else {
+      this.cardService.findAllMonsterTypeRace(this.page, 18, this.search.type, this.search.race).subscribe((u) => {
+        let start = this.cards.length;
+        this.cards = this.cards.concat(u['data'])
+        this.meta = this.meta.concat(u['meta'])
+        let end = this.cards.length - 1;
+
+      })
+    }
+
   }
 
   onClick(c) {
-    this.navCtrl.navigateForward("detais-cards", { state: { c: c } })
+    this.navCtrl.navigateRoot("detais-cards", { state: { c: c } })
   }
   doInfinite(event) {
 

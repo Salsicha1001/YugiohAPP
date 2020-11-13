@@ -145,5 +145,13 @@ export class DetaisCardsPage implements OnInit {
     });
     return await modal.present();
   }
-
+  findArchetype(c) {
+    let a = {
+      'attribute': c,
+      'att':true
+    }
+    this.navCtrl.navigateRoot('list-cards-search', {
+      state:{any:a}
+    })
+  }
 }

@@ -1,8 +1,8 @@
 .card{
     width: 370px;
-  height: 507px;
+    height: 507px;
     position: relative;
-    animation: flip 5s alternate infinite ease-in-out;
+    animation: flip 12s alternate infinite ease-in-out;
     transform-style: preserve-3d;
 }
 .front{
