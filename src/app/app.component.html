@@ -6,6 +6,11 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
+      <ion-list>
+      <ion-menu-toggle  auto-hide="true">
+      <ion-item routerLink="/favorites">Favoritos<ion-badge slot="end">{{tamanho}}</ion-badge></ion-item>
+    </ion-menu-toggle>
+      </ion-list>
       <ion-list *ngFor="let item of pages">
         <ion-menu-toggle  auto-hide="true">
         <ion-item routerLink="/{{item.component}}" (click)="ButtonClick(item.title)">{{item.title}}</ion-item>

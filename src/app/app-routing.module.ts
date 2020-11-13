@@ -23,11 +23,15 @@ const routes: Routes = [
   },
   {
     path: 'list-cards-search',
-    loadChildren: () => import('./list-cards-search/list-cards-search.module').then( m => m.ListCardsSearchPageModule)
+    loadChildren: () => import('./list-cards-search/list-cards-search.module').then( m => m.ListCardsSearchPageModule),canActivate:[AuthGuardService]
   },
   {
     path: 'favorites',
-    loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
+    loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule),canActivate:[AuthGuardService]
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
 
 

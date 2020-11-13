@@ -1,3 +1,4 @@
+import { UserModel } from './../../Model/User.model';
 import { API_CONFIG } from './../../Config/api.config';
 import { StorageService } from './../Storage.service';
 import { HttpClient } from '@angular/common/http';
@@ -22,10 +23,18 @@ constructor(private http:HttpClient, private storageService:StorageService) { }
   }
   getCardUser() {
     let email = this.storageService.getLocalUser().email
-    return this.http.get(`${API_CONFIG.base_url}/card/cart/${email}`)
-  }
+    if (email != null) {
+      return this.http.get(`${API_CONFIG.base_url}/card/cart/${email}`)
+    }
+    }
   removeCard(id) {
     return this.http.get(`${API_CONFIG.base_url}/card/remove/${id}`)
 
+  }
+  addUser(user: UserModel) {
+    return this.http.post(`${API_CONFIG.base_url}/user`, user);
+  }
+  logout() {
+    this.storageService.setLocalUser(null);
   }
 }

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="signupUser(); $event.preventDefault()" [formGroup]="form">
+  <ion-item>
+    <ion-label stacked position="floating">Nome</ion-label>
+    <ion-input  type="text" formControlName="firstName" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked position="floating">Sobrenome</ion-label>
+    <ion-input  type="text" formControlName="lastName" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked position="floating">Email</ion-label>
+    <ion-input formControlName="email" type="text"></ion-input>
+  </ion-item>
+  <p class="danger" *ngIf="form.controls.email.dirty && form.controls.email.errors" margin-left>Valor inválido</p>
+ 
+  <ion-item>
+    <ion-label stacked position="floating">CPF</ion-label>
+    <ion-input formControlName="cpf" type="text"></ion-input>
+  </ion-item>
+ 
+  <ion-item>
+    <ion-label stacked position="floating">Data de Aniversário</ion-label>
+    <ion-datetime formControlName="birthday" displayFormat="DD/MM/YYYY"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked position="floating">Número de contato</ion-label>
+    <ion-input formControlName="phone" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked position="floating">Senha</ion-label>
+    <ion-input formControlName="password" type="password"></ion-input>
+  </ion-item> 
+  <ion-item>
+    <ion-label stacked position="floating">Repita sua Senha</ion-label>
+    <ion-input formControlName="password2" type="password"></ion-input>
+  </ion-item> 
+  <ion-button block type="submit" [disabled]="form.invalid">Criar conta</ion-button>
+</form>
+</ion-content>

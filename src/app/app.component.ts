@@ -1,3 +1,6 @@
+import { StorageService } from './Services/Storage.service';
+import { UserService } from './Services/User/user.service';
+import { CardService } from './Services/Cards/card.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -13,18 +16,20 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   pages: Array<{ title: string; component: string; }>;
-
+  tamanho: any
+  time: any
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-
+    private userService: UserService,
+    private strorageService: StorageService
   ) {
     this.initializeApp();
     this.sideMenu();
   }
   ngOnInit() {
-
+    this.favoritesTam();
   }
 
   initializeApp() {
@@ -36,16 +41,32 @@ export class AppComponent implements OnInit {
 
   sideMenu() {
     this.pages = [
-      { title: "Perfil", component: "profile" },
       { title: "Cartas", component: "search-cards" },
-      {title:"Favoritos", component:"favorites"}
-   
+      { title: "Perfil", component: "profile" },
+      { title: "Sair", component: "login" }
+
+
     ];
   }
 
+  favoritesTam() {
+    console.log(this.strorageService.getLocalUser().email)
+    this.time = setInterval(() => {
+      if (this.strorageService.getLocalUser().email != null) {
+        this.userService.getCardUser().subscribe((u: any[]) => {
+          if (u.length > 0) {
+            this.tamanho = u.length;
+          }
+        })
+      }
+    }, 1000)
+  }
+
   ButtonClick(s) {
-    if ("Logout" === s) {
- //     this.authService.logout();
+    if ("Sair" === s) {
+      this.userService.logout();
+      clearInterval(this.time)
+
     }
 
   }
