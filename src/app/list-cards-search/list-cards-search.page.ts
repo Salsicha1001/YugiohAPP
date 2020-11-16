@@ -1,9 +1,7 @@
-import { async } from '@angular/core/testing';
 import { CardService } from './../Services/Cards/card.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, NavController, NavParams } from '@ionic/angular';
-import { truncate } from 'fs';
 
 @Component({
   selector: 'app-list-cards-search',

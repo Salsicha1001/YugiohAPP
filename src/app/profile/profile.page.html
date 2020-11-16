@@ -6,7 +6,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
- <p>{{user?.firstName}} {{user?.lastName}}</p>
-<p>{{user?.email}}</p>
+    <div class="imgs">
+      <img src="../../assets/img/yuma.jpg">
+    </div>
+<div>
+ <p class="nome">{{user?.firstName}} {{user?.lastName}}</p>
+<p>Email:{{user?.email}}</p>
+<p>Numero:{{user?.number}}</p>
+<p>Data de Aniversário:{{user?.birthday}}</p>
+</div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" fill="outline" color="danger" (click)="logout()">Logout</ion-button>
+  </ion-toolbar>
+</ion-footer>
